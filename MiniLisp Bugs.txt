@@ -1,0 +1,11 @@
+Error Number 1: trying to pass the 'lambda' as is
+
+AttributeError: 'NoneType' object has no attribute 'find'
+
+Error Number 2: trying to pass the lambda as a compiled string
+
+"TypeError: 'tablecode' object is not callable
+
+Error Number 3: trying to pass the lambda as a <lambda> function via exec
+
+'NoneType' object is not callable
