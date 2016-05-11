@@ -1,0 +1,294 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> exp
+Rule 1     exp -> atom
+Rule 2     exp -> BSLASH LPAREN exp RPAREN
+Rule 3     exp -> atom PLUS atom
+Rule 4     exp -> QUOTE exp QUOTE
+Rule 5     exp -> LET atom SIMB exp
+Rule 6     atom -> SIMB
+Rule 7     atom -> NUM
+Rule 8     atom -> TEXT
+Rule 9     atom -> <empty>
+
+Terminals, with rules where they appear
+
+BSLASH               : 2
+LET                  : 5
+LPAREN               : 2
+NUM                  : 7
+PLUS                 : 3
+QUOTE                : 4 4
+RPAREN               : 2
+SIMB                 : 5 6
+TEXT                 : 8
+error                : 
+
+Nonterminals, with rules where they appear
+
+atom                 : 1 3 3 5
+exp                  : 2 4 5 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . exp
+    (1) exp -> . atom
+    (2) exp -> . BSLASH LPAREN exp RPAREN
+    (3) exp -> . atom PLUS atom
+    (4) exp -> . QUOTE exp QUOTE
+    (5) exp -> . LET atom SIMB exp
+    (6) atom -> . SIMB
+    (7) atom -> . NUM
+    (8) atom -> . TEXT
+    (9) atom -> .
+
+    BSLASH          shift and go to state 5
+    QUOTE           shift and go to state 1
+    LET             shift and go to state 6
+    SIMB            shift and go to state 4
+    NUM             shift and go to state 2
+    TEXT            shift and go to state 3
+    PLUS            reduce using rule 9 (atom -> .)
+    $end            reduce using rule 9 (atom -> .)
+
+    exp                            shift and go to state 7
+    atom                           shift and go to state 8
+
+state 1
+
+    (4) exp -> QUOTE . exp QUOTE
+    (1) exp -> . atom
+    (2) exp -> . BSLASH LPAREN exp RPAREN
+    (3) exp -> . atom PLUS atom
+    (4) exp -> . QUOTE exp QUOTE
+    (5) exp -> . LET atom SIMB exp
+    (6) atom -> . SIMB
+    (7) atom -> . NUM
+    (8) atom -> . TEXT
+    (9) atom -> .
+
+  ! shift/reduce conflict for QUOTE resolved as shift
+    BSLASH          shift and go to state 5
+    QUOTE           shift and go to state 1
+    LET             shift and go to state 6
+    SIMB            shift and go to state 4
+    NUM             shift and go to state 2
+    TEXT            shift and go to state 3
+    PLUS            reduce using rule 9 (atom -> .)
+
+  ! QUOTE           [ reduce using rule 9 (atom -> .) ]
+
+    exp                            shift and go to state 9
+    atom                           shift and go to state 8
+
+state 2
+
+    (7) atom -> NUM .
+
+    PLUS            reduce using rule 7 (atom -> NUM .)
+    QUOTE           reduce using rule 7 (atom -> NUM .)
+    $end            reduce using rule 7 (atom -> NUM .)
+    RPAREN          reduce using rule 7 (atom -> NUM .)
+    SIMB            reduce using rule 7 (atom -> NUM .)
+
+
+state 3
+
+    (8) atom -> TEXT .
+
+    PLUS            reduce using rule 8 (atom -> TEXT .)
+    QUOTE           reduce using rule 8 (atom -> TEXT .)
+    $end            reduce using rule 8 (atom -> TEXT .)
+    RPAREN          reduce using rule 8 (atom -> TEXT .)
+    SIMB            reduce using rule 8 (atom -> TEXT .)
+
+
+state 4
+
+    (6) atom -> SIMB .
+
+    PLUS            reduce using rule 6 (atom -> SIMB .)
+    QUOTE           reduce using rule 6 (atom -> SIMB .)
+    $end            reduce using rule 6 (atom -> SIMB .)
+    RPAREN          reduce using rule 6 (atom -> SIMB .)
+    SIMB            reduce using rule 6 (atom -> SIMB .)
+
+
+state 5
+
+    (2) exp -> BSLASH . LPAREN exp RPAREN
+
+    LPAREN          shift and go to state 10
+
+
+state 6
+
+    (5) exp -> LET . atom SIMB exp
+    (6) atom -> . SIMB
+    (7) atom -> . NUM
+    (8) atom -> . TEXT
+    (9) atom -> .
+
+  ! shift/reduce conflict for SIMB resolved as shift
+    SIMB            shift and go to state 4
+    NUM             shift and go to state 2
+    TEXT            shift and go to state 3
+
+  ! SIMB            [ reduce using rule 9 (atom -> .) ]
+
+    atom                           shift and go to state 11
+
+state 7
+
+    (0) S' -> exp .
+
+
+
+state 8
+
+    (1) exp -> atom .
+    (3) exp -> atom . PLUS atom
+
+    $end            reduce using rule 1 (exp -> atom .)
+    RPAREN          reduce using rule 1 (exp -> atom .)
+    QUOTE           reduce using rule 1 (exp -> atom .)
+    PLUS            shift and go to state 12
+
+
+state 9
+
+    (4) exp -> QUOTE exp . QUOTE
+
+    QUOTE           shift and go to state 13
+
+
+state 10
+
+    (2) exp -> BSLASH LPAREN . exp RPAREN
+    (1) exp -> . atom
+    (2) exp -> . BSLASH LPAREN exp RPAREN
+    (3) exp -> . atom PLUS atom
+    (4) exp -> . QUOTE exp QUOTE
+    (5) exp -> . LET atom SIMB exp
+    (6) atom -> . SIMB
+    (7) atom -> . NUM
+    (8) atom -> . TEXT
+    (9) atom -> .
+
+    BSLASH          shift and go to state 5
+    QUOTE           shift and go to state 1
+    LET             shift and go to state 6
+    SIMB            shift and go to state 4
+    NUM             shift and go to state 2
+    TEXT            shift and go to state 3
+    PLUS            reduce using rule 9 (atom -> .)
+    RPAREN          reduce using rule 9 (atom -> .)
+
+    exp                            shift and go to state 14
+    atom                           shift and go to state 8
+
+state 11
+
+    (5) exp -> LET atom . SIMB exp
+
+    SIMB            shift and go to state 15
+
+
+state 12
+
+    (3) exp -> atom PLUS . atom
+    (6) atom -> . SIMB
+    (7) atom -> . NUM
+    (8) atom -> . TEXT
+    (9) atom -> .
+
+    SIMB            shift and go to state 4
+    NUM             shift and go to state 2
+    TEXT            shift and go to state 3
+    $end            reduce using rule 9 (atom -> .)
+    QUOTE           reduce using rule 9 (atom -> .)
+    RPAREN          reduce using rule 9 (atom -> .)
+
+    atom                           shift and go to state 16
+
+state 13
+
+    (4) exp -> QUOTE exp QUOTE .
+
+    $end            reduce using rule 4 (exp -> QUOTE exp QUOTE .)
+    RPAREN          reduce using rule 4 (exp -> QUOTE exp QUOTE .)
+    QUOTE           reduce using rule 4 (exp -> QUOTE exp QUOTE .)
+
+
+state 14
+
+    (2) exp -> BSLASH LPAREN exp . RPAREN
+
+    RPAREN          shift and go to state 17
+
+
+state 15
+
+    (5) exp -> LET atom SIMB . exp
+    (1) exp -> . atom
+    (2) exp -> . BSLASH LPAREN exp RPAREN
+    (3) exp -> . atom PLUS atom
+    (4) exp -> . QUOTE exp QUOTE
+    (5) exp -> . LET atom SIMB exp
+    (6) atom -> . SIMB
+    (7) atom -> . NUM
+    (8) atom -> . TEXT
+    (9) atom -> .
+
+  ! shift/reduce conflict for QUOTE resolved as shift
+    BSLASH          shift and go to state 5
+    QUOTE           shift and go to state 1
+    LET             shift and go to state 6
+    SIMB            shift and go to state 4
+    NUM             shift and go to state 2
+    TEXT            shift and go to state 3
+    PLUS            reduce using rule 9 (atom -> .)
+    $end            reduce using rule 9 (atom -> .)
+    RPAREN          reduce using rule 9 (atom -> .)
+
+  ! QUOTE           [ reduce using rule 9 (atom -> .) ]
+
+    atom                           shift and go to state 8
+    exp                            shift and go to state 18
+
+state 16
+
+    (3) exp -> atom PLUS atom .
+
+    $end            reduce using rule 3 (exp -> atom PLUS atom .)
+    RPAREN          reduce using rule 3 (exp -> atom PLUS atom .)
+    QUOTE           reduce using rule 3 (exp -> atom PLUS atom .)
+
+
+state 17
+
+    (2) exp -> BSLASH LPAREN exp RPAREN .
+
+    $end            reduce using rule 2 (exp -> BSLASH LPAREN exp RPAREN .)
+    RPAREN          reduce using rule 2 (exp -> BSLASH LPAREN exp RPAREN .)
+    QUOTE           reduce using rule 2 (exp -> BSLASH LPAREN exp RPAREN .)
+
+
+state 18
+
+    (5) exp -> LET atom SIMB exp .
+
+    $end            reduce using rule 5 (exp -> LET atom SIMB exp .)
+    RPAREN          reduce using rule 5 (exp -> LET atom SIMB exp .)
+    QUOTE           reduce using rule 5 (exp -> LET atom SIMB exp .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for QUOTE in state 1 resolved as shift
+WARNING: shift/reduce conflict for SIMB in state 6 resolved as shift
+WARNING: shift/reduce conflict for QUOTE in state 15 resolved as shift
